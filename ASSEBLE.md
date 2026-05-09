@@ -1,3 +1,4 @@
+
 # Assembly Instructions
  
 ## Parts Needed
@@ -70,9 +71,11 @@ Once powered, the ESP32-S3 should boot and the calculator should be recognized w
 - Make sure the cable is plugged into the port labeled `USB`, not `COM`.
 - Try a different USB-C to USB-Mini-B cable. Some cables are charge-only and carry no data lines.
 - Make sure the messaging program is open on the calculator before connecting the ESP32-S3.
+
 **ESP32-S3 not powering on**
 - Check that the power bank is turned on and has charge.
 - Confirm the USB-A to USB-C cable is plugged into the `COM` port on the board.
 **Messages not reaching other calculators**
+
 - Confirm all ESP32-S3 boards in the group have been flashed with firmware containing each other's MAC addresses.
 - Keep boards within a reasonable range. ESP-NOW has a practical range of roughly 200-400m in open air, significantly less indoors.
