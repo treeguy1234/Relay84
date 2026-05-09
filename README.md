@@ -24,8 +24,9 @@ Each calculator connects via USB to an ESP32-S3. When a message is sent from the
 
 ### Software
 - [CE C/C++ Toolchain](https://github.com/CE-Programming/toolchain) — for building the calculator-side program
-- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/) or [PlatformIO](https://platformio.org/) — for building the ESP32-S3 firmware
-- A jailbreak program if your calculator's OS version is **5.5.1 or higher** (see [TI-Planet](https://tiplanet.org/))
+- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/) and [PlatformIO](https://platformio.org/) — for building the ESP32-S3 firmware
+- [Visual Studio Code](https://code.visualstudio.com/)
+- A jailbreak program if your calculator's OS version is **5.5.1 or higher** ([Cesium Shell](https://www.ticalc.org/archives/files/fileinfo/465/46574.html) and [arTIfiCE Shell](https://yvantt.github.io/arTIfiCE/))
 
 ---
 
