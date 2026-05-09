@@ -62,7 +62,7 @@ You can find an ESP32's MAC address by flashing it and reading the boot log outp
 
 Follow the [CE C Toolchain setup guide](https://ce-programming.github.io/toolchain/static/setup.html) to install the toolchain, then build the calculator source from the `calculator/` directory. Transfer the resulting `.8xp` file to your TI-84 Plus CE using [TI Connect CE](https://education.ti.com/en/products/computer-software/ti-connect-ce-sw) or [TILP](http://lpg.ticalc.org/prj_tilp/).
 
-> **OS 5.5.1 or higher?** You will need to install a jailbreak before running unsigned programs. See the [Jailbreak Guide](https://tiplanet.org/) for instructions.
+> **OS 5.5.1 or higher?** You will need to install a jailbreak before running unsigned programs. See [JAILBREAK.md]([https://tiplanet.org/](https://github.com/treeguy1234/TI-84-Plus-CE-Messaging-System/blob/main/JAILBREAK.md)) for instructions.
 
 ### 3. Connect and Chat
 
