@@ -75,7 +75,7 @@ Once powered, the ESP32-S3 should boot and the calculator should be recognized w
 **ESP32-S3 not powering on**
 - Check that the power bank is turned on and has charge.
 - Confirm the USB-A to USB-C cable is plugged into the `COM` port on the board.
-**Messages not reaching other calculators**
 
+**Messages not reaching other calculators**
 - Confirm all ESP32-S3 boards in the group have been flashed with firmware containing each other's MAC addresses.
 - Keep boards within a reasonable range. ESP-NOW has a practical range of roughly 200-400m in open air, significantly less indoors.
