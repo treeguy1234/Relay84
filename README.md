@@ -23,8 +23,8 @@ Each calculator connects via USB to an ESP32-S3. When a message is sent from the
 - USB-C cable for ESP32-to-power-supply
 
 ### Software
-- [CE C/C++ Toolchain](https://github.com/CE-Programming/toolchain) — for building the calculator-side program
-- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/) and [PlatformIO](https://platformio.org/) — for building the ESP32-S3 firmware
+- [CE C/C++ Toolchain](https://github.com/CE-Programming/toolchain)
+- [PlatformIO](https://platformio.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - A jailbreak program if your calculator's OS version is **5.5.1 or higher** ([Cesium Shell](https://www.ticalc.org/archives/files/fileinfo/465/46574.html) and [arTIfiCE Shell](https://yvantt.github.io/arTIfiCE/))
 
@@ -35,7 +35,7 @@ Each calculator connects via USB to an ESP32-S3. When a message is sent from the
 ```
 TI-84-Plus-CE-Messaging-System/
 ├── calc/        # CE C Toolchain source for the calculator client
-├── esp32/       # ESP-IDF/PlatformIO source for the ESP32-S3 firmware
+├── esp32/       # PlatformIO source for the ESP32-S3 firmware
 └── pictures/    # Picture references for how to set up. Primarily used as a picture hosting folder for the main .md files
 ```
 
@@ -45,7 +45,7 @@ TI-84-Plus-CE-Messaging-System/
 
 ### 1. Flash the ESP32-S3
 
-Open `esp32/` in PlatformIO or ESP-IDF. Before building, edit the MAC address table in `main.c` to include the MAC addresses of every ESP32-S3 in your group:
+Open `esp32/` in PlatformIO. Before building, edit the MAC address table in `main.c` to include the MAC addresses of every ESP32-S3 in your group:
 
 ```c
 uint8_t peerMACAdresses[][6] = {
@@ -57,7 +57,7 @@ You can find an ESP32's MAC address by flashing it and reading the boot log outp
 
 ### 2. Build the Calculator Program
 
-Follow the [CE C Toolchain setup guide](https://ce-programming.github.io/toolchain/static/setup.html) to install the toolchain, then build the calculator source from the `calculator/` directory. Transfer the resulting `.8xp` file to your TI-84 Plus CE using [TI Connect CE](https://education.ti.com/en/products/computer-software/ti-connect-ce-sw) or [TILP](http://lpg.ticalc.org/prj_tilp/).
+Follow the [CE C Toolchain setup guide](https://ce-programming.github.io/toolchain/static/setup.html) to install the toolchain, then build the calculator source from the `calculator/` directory. Transfer the resulting `.8xp` file in the `bin` folder to your TI-84 Plus CE using [TI Connect CE](https://education.ti.com/en/products/computer-software/ti-connect-ce-sw) or [TILP](http://lpg.ticalc.org/prj_tilp/).
 
 > **OS 5.5.1 or higher?** You will need to install a jailbreak before running unsigned programs. See [JAILBREAK.md]([https://tiplanet.org/](https://github.com/treeguy1234/TI-84-Plus-CE-Messaging-System/blob/main/JAILBREAK.md)) for instructions.
 
