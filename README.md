@@ -33,13 +33,10 @@ Each calculator connects via USB to an ESP32-S3. When a message is sent from the
 ## Project Structure
 
 ```
-CalcBridge/
-├── calculator/        # CE C Toolchain source for the calculator client
-└── esp32/             # ESP-IDF/PlatformIO source for the ESP32-S3 firmware
-    └── src/
-        ├── main.c
-        ├── ring_buffer.c
-        └── ring_buffer.h
+TI-84-Plus-CE-Messaging-System/
+├── calc/        # CE C Toolchain source for the calculator client
+├── esp32/       # ESP-IDF/PlatformIO source for the ESP32-S3 firmware
+└── pictures/    # Picture references for how to set up. Primarily used as a picture hosting folder for the main .md files
 ```
 
 ---
