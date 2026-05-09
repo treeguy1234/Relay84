@@ -1,0 +1,101 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_tanhl
+_tanhl:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	push	bc
+	push	de
+	push	hl
+	call	_fabsl
+	push	hl
+	pop	iy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	(ix - 9), bc
+	push	bc
+	ld	(ix - 6), de
+	push	de
+	ld	(ix - 3), iy
+	push	iy
+	ld	de, 0
+	push	de
+	pop	hl
+	push	de
+	pop	iy
+	ld.sis	bc, 16437
+	call	__dcmp
+	pop	hl
+	pop	hl
+	pop	hl
+	jp	p, BB0_2
+	ld.sis	bc, 16368
+	lea	de, iy
+	jp	BB0_3
+BB0_2:
+	ld	hl, (ix - 9)
+	push	hl
+	ld	hl, (ix - 6)
+	push	hl
+	ld	hl, (ix - 3)
+	push	hl
+	call	_sinhl
+	ld	(ix - 12), hl
+	ld	(ix - 15), de
+	ld	(ix - 18), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 9)
+	push	hl
+	ld	hl, (ix - 6)
+	push	hl
+	ld	hl, (ix - 3)
+	push	hl
+	call	_coshl
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 12)
+	ld	de, (ix - 15)
+	ld	bc, (ix - 18)
+	call	__ddiv
+	push	hl
+	pop	iy
+	pop	hl
+	pop	hl
+	pop	hl
+BB0_3:
+	ld	hl, (ix + 12)
+	push	hl
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	_copysignl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	_fabsl
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__dcmp
+	extern	_coshl
+	extern	_copysignl
+	extern	_sinhl
+	extern	__ddiv

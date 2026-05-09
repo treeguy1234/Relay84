@@ -1,0 +1,17 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__issignalingl
+
+; assumes quiet NaN is NaN with bit 51 set
+; bool _issignalingl(long double)
+__issignalingl:
+	ld	hl, 9
+	add	hl, sp
+	bit	3, (hl) ; 51 % 8 == 3
+	jp	z, __isnanl
+	xor	a, a	; quiet bit set, return false
+	ret
+
+	extern	__isnanl

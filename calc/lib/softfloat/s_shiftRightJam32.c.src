@@ -1,0 +1,85 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_softfloat_shiftRightJam32
+_softfloat_shiftRightJam32:
+	ld	hl, -4
+	call	__frameset
+	ld	de, (ix + 6)
+	ld	a, (ix + 9)
+	ld	iy, (ix + 12)
+	ld.sis	bc, 31
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	or	a, a
+	sbc.sis	hl, bc
+	jr	nc, BB0_3
+	or	a, a
+	sbc	hl, hl
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	push	de
+	pop	bc
+	call	__lshru
+	ld	(ix - 3), bc
+	ld	(ix - 4), a
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	call	__sneg
+	ld.sis	bc, 31
+	call	__sand
+	ld	de, 0
+	ld	e, l
+	ld	d, h
+	ld	l, e
+	ld	bc, (ix + 6)
+	ld	a, (ix + 9)
+	call	__lshl
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__lcmpzero
+	jr	nz, BB0_5
+	ld	bc, 0
+	jr	BB0_6
+BB0_3:
+	ex	de, hl
+	ld	e, a
+	call	__lcmpzero
+	jr	nz, BB0_7
+	ld	hl, 0
+	jr	BB0_8
+BB0_5:
+	ld	bc, 1
+BB0_6:
+	ld	hl, (ix - 3)
+	ld	e, (ix - 4)
+	xor	a, a
+	call	__lor
+	jr	BB0_9
+BB0_7:
+	ld	hl, 1
+BB0_8:
+	ld	e, 0
+BB0_9:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__sneg
+	extern	__lor
+	extern	__lshl
+	extern	__frameset
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__lcmpzero
+	extern	__sand
+	extern	__lshru

@@ -1,0 +1,17 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__isfinitef
+
+; bool _isfinitef(float)
+__isfinitef:
+	ld	hl, 5
+	add	hl, sp
+	ld	hl, (hl)
+	add	hl, hl
+	ld	a, h
+	sub	a, $FF	; NaN/inf exponent won't underflow
+	sbc	a, a
+	ret
+

@@ -1,0 +1,74 @@
+	assume	adl=1
+
+	section	.text
+	public	_strlcpy
+
+; BSD variant of strncpy that ensures the destination is null-terminated.
+; OpenBSD reference: https://github.com/openbsd/src/blob/master/lib/libc/string/strlcpy.c
+; size_t strlcpy(char *dst, const char *src, size_t dsize)
+
+_strlcpy:
+
+	ld iy, 0
+	lea bc, iy ; set bc to 0
+	add iy, sp
+
+	; do min(strlen(src), dsize-1)
+
+	; strlen(src)
+	ld hl, (iy + 6) ; hl = pointer to src
+	xor a, a ; clear carry and set a to 0
+	cpir ; dec bc until byte at (hl) matches a (= NUL)
+	; calculate HL=-BC-1
+	sbc hl, hl
+	scf
+	sbc hl, bc ; always sets carry flag
+	; now hl = strlen(src)
+
+	ld bc, (iy + 9) ; bc = dsize
+	ex de, hl ; de = strlen(src)
+
+	; check if dsize is zero
+	sbc hl, hl ; set hl to -1, carry was already set
+	add hl, bc ; hl = -1 + dsize
+        ex de, hl ; hl = strlen(src), de = dsize - 1
+	ret nc ; do nothing and return strlen(src) if dsize is zero
+
+	push hl ; save strlen(src) for after copy
+
+	; dsize is not zero, compare them
+	; hl = strlen(src)
+	; de = dsize - 1
+
+	; carry flag is set, so calculate hl - (de + 1)
+	sbc hl, de
+
+	; if hl > de, strlen(src) > (dsize - 1); string is truncated, keep bc as dsize
+	jr nc, .ready_for_ldir
+
+	; hl <= de, so strlen(src) <= (dsize - 1); string is not truncated, set bc to strlen(src) + 1
+	pop bc
+	push bc
+	inc bc
+
+.ready_for_ldir:
+	ld de, (iy + 3) ; put dst in de
+	ld hl, (iy + 6) ; put src in hl
+	; bc is filled already and greater than 0
+
+	; at this point we are set up for an ldir:
+	; hl has the start address
+	; de has the destination address
+	; bc has the length (including space for null terminator)
+	ldir
+
+	pop hl ; get the result of strlen(src) from earlier and put into hl
+
+	ret c ; return strlen(src) if string was not truncated
+
+	; string was truncated, so replace final byte with NUL
+	dec de
+	; a is already 0
+	ld (de), a ; store null terminator at the address pointed to by de
+
+	ret ; return strlen(src)

@@ -1,0 +1,13 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__signbitl
+
+; bool _signbitl(long double)
+__signbitl:
+	ld	hl, 10
+	add	hl, sp
+	ld	a, (hl)
+	rlca	; faster than rla \ sbc a, a
+	ret

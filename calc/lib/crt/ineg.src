@@ -1,0 +1,28 @@
+	assume	adl=1
+
+	section	.text
+	public	__ineg
+
+if PREFER_OS_CRT
+
+__ineg := 000160h
+
+else
+
+__ineg:
+; UHL = -UHL
+;   CC: 10*r(PC)+3*r(SPL)+1
+;   CC: 9 bytes | 10F + 3R + 1
+	add	hl, de	; uhl=UHL+UDE
+	ex	de, hl	; ude=UHL+UDE, uhl=UDE
+	or	a, a
+	sbc	hl, de	; uhl=UDE-(UHL+UDE)
+			;    =UDE-UHL-UDE
+			;    =-UHL
+	ex	de, hl	; ude=-UHL, uhl=UHL+UDE
+	add	hl, de	; uhl=UHL+UDE+-UHL
+			;    =UDE
+	ex	de, hl	; ude=UDE, uhl=-UHL
+	ret
+
+end if

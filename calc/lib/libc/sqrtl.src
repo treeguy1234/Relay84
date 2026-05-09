@@ -1,0 +1,17 @@
+	assume	adl=1
+
+	section	.text
+
+	public	_sqrtl
+
+_sqrtl:
+	; flags handled by softfloat
+	ld	hl, 10
+	add	hl, sp
+	ld	a, (hl)
+	rlca
+	inc	hl
+	ld	(hl), a
+	jq	___f64_sqrt
+
+	extern	___f64_sqrt

@@ -1,0 +1,73 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	__tanhf_c
+__tanhf_c:
+	ld	hl, -10
+	call	__frameset
+	ld	de, (ix + 6)
+	ld	l, (ix + 9)
+	push	hl
+	push	de
+	call	_fabsf
+	push	hl
+	pop	bc
+	ld	iyl, e
+	pop	hl
+	pop	hl
+	ld	hl, 2097152
+	ld	e, 65
+	ld	a, iyl
+	call	__fcmp
+	jp	p, BB0_2
+	ld	bc, -8388608
+	ld	l, 63
+	jr	BB0_3
+BB0_2:
+	push	iy
+	push	bc
+	ld	(ix - 7), bc
+	ld	(ix - 10), iy
+	call	_sinhf
+	ld	(ix - 3), hl
+	ld	(ix - 4), e
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 10)
+	push	hl
+	ld	hl, (ix - 7)
+	push	hl
+	call	_coshf
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 3)
+	ld	a, (ix - 4)
+	call	__fdiv
+	ld	l, a
+BB0_3:
+	ld	e, (ix + 9)
+	push	de
+	ld	de, (ix + 6)
+	push	de
+	push	hl
+	push	bc
+	call	_copysignf
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	__tanh_c
+	label	__tanh_c at __tanhf_c
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	_fabsf
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__fdiv
+	extern	_coshf
+	extern	_sinhf
+	extern	_copysignf
+	extern	__fcmp

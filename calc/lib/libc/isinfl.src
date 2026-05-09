@@ -1,0 +1,23 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__isinfl
+
+; bool _isinfl(long double)
+__isinfl:
+	pop	bc, hl, de
+	xor	a, a
+	adc	hl, de
+	pop	de
+	push	bc, bc, bc, bc
+	ret	nz	; mant_nonzero
+	ret	c	; mant_carry
+	ld	a, e
+	xor	a, $F0	; sets A to zero if the bit pattern matches infinity
+	set	7, d
+	inc	d	; set d to zero if it matches infinity
+	or	a, d
+	sub	a, 1
+	sbc	a, a
+	ret

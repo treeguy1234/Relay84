@@ -1,0 +1,181 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_roundevenl
+_roundevenl:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	___f64_roundToInt
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_roundl
+_roundl:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, 4
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	___f64_roundToInt
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_lroundl
+_lroundl:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, 4
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	___f64_to_i32
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_llroundl
+_llroundl:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, 4
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	___f64_to_i64
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_nearbyintl
+_nearbyintl:
+	call	__frameset0
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	ld	a, (___fe_cur_env)
+	and	a, 3
+	ld	l, a
+	ld	iy, 0
+	push	iy
+	push	hl
+	push	bc
+	push	de
+	ld	hl, (ix + 6)
+	push	hl
+	call	___f64_roundToInt
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_rintl
+_rintl:
+	call	__frameset0
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	ld	a, (___fe_cur_env)
+	and	a, 3
+	ld	l, a
+	ld	iy, 1
+	push	iy
+	push	hl
+	push	bc
+	push	de
+	ld	hl, (ix + 6)
+	push	hl
+	call	___f64_roundToInt
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_lrintl
+_lrintl:
+	call	__frameset0
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	ld	a, (___fe_cur_env)
+	and	a, 3
+	ld	l, a
+	ld	iy, 1
+	push	iy
+	push	hl
+	push	bc
+	push	de
+	ld	hl, (ix + 6)
+	push	hl
+	call	___f64_to_i32
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_llrintl
+_llrintl:
+	call	__frameset0
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	ld	a, (___fe_cur_env)
+	and	a, 3
+	ld	l, a
+	ld	iy, 1
+	push	iy
+	push	hl
+	push	bc
+	push	de
+	ld	hl, (ix + 6)
+	push	hl
+	call	___f64_to_i64
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	___f64_roundToInt
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	___f64_to_i64
+	extern	__frameset0
+	extern	___fe_cur_env
+	extern	___f64_to_i32

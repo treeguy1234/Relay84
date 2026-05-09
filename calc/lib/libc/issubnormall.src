@@ -1,0 +1,28 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__issubnormall
+
+; bool _issubnormall(long double)
+__issubnormall:
+	pop	bc, hl, de
+	or	a, a
+	adc	hl, de
+	pop	de
+	push	bc, bc, bc, bc
+	; zero is not subnormal
+	jr	nz, .mant_nonzero
+	jr	c, .mant_carry
+	ld	a, e
+	and	a, $0F
+	ret	z	; mantissa is zero
+.mant_nonzero:
+.mant_carry:
+	ld	a, e
+	and	a, $F0
+	res	7, d
+	or	a, d
+	sub	a, 1
+	sbc	a, a
+	ret

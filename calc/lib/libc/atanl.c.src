@@ -1,0 +1,418 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_atanl
+_atanl:
+	call	__frameset0
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	push	bc
+	push	de
+	push	hl
+	call	_fabsl
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	call	__f64_satan
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix + 12)
+	push	iy
+	ld	iy, (ix + 9)
+	push	iy
+	ld	iy, (ix + 6)
+	push	iy
+	push	bc
+	push	de
+	push	hl
+	call	_copysignl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	__f64_satan
+__f64_satan:
+	ld	hl, -9
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	bc, (ix + 12)
+	ld	iy, -200910
+	ld	de, 16346
+	push	de
+	ld	de, -8226407
+	push	de
+	push	iy
+	ld	de, (ix + 9)
+	call	__dcmp
+	pop	hl
+	pop	hl
+	pop	hl
+	jp	p, BB1_2
+	ld	hl, (ix + 12)
+	push	hl
+	push	de
+	ld	hl, (ix + 6)
+	push	hl
+	call	__f64_xatan
+	jp	BB1_7
+BB1_2:
+	ld	hl, 4169190
+	ld.sis	bc, 16387
+	ld	iy, (ix + 12)
+	push	iy
+	push	de
+	ld	iy, (ix + 6)
+	push	iy
+	ld	de, 5263155
+	call	__dcmp
+	pop	hl
+	pop	hl
+	pop	hl
+	jp	p, BB1_5
+	ld.sis	bc, 17232
+	ld	hl, (ix + 12)
+	push	hl
+	ld	iy, (ix + 9)
+	push	iy
+	ld	hl, (ix + 6)
+	push	hl
+	ld	de, 0
+	push	de
+	pop	hl
+	call	__dcmp
+	pop	hl
+	pop	hl
+	pop	hl
+	jp	p, BB1_6
+	ld	hl, 4467992
+	ld	de, 2227028
+	ld.sis	bc, 16377
+	jp	BB1_8
+BB1_5:
+	ld	hl, -16400
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	hl
+	ld	hl, (ix + 6)
+	ld	iy, (ix + 9)
+	lea	de, iy
+	ld	bc, (ix + 12)
+	call	__dadd
+	ld	(ix - 3), hl
+	ld	(ix - 6), de
+	ld	(ix - 9), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 16368
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	hl
+	ld	hl, (ix + 6)
+	lea	de, iy
+	ld	bc, (ix + 12)
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 3)
+	ld	de, (ix - 6)
+	ld	bc, (ix - 9)
+	call	__ddiv
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	call	__f64_xatan
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16361
+	push	iy
+	ld	iy, 2227028
+	push	iy
+	ld	iy, 4467992
+	push	iy
+	call	__dadd
+	jp	BB1_7
+BB1_6:
+	ld.sis	bc, 16368
+	ld	hl, (ix + 12)
+	push	hl
+	push	iy
+	ld	hl, (ix + 6)
+	push	hl
+	push	de
+	pop	hl
+	call	__ddiv
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	call	__f64_xatan
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, 4467992
+	ld	de, 2227028
+	ld.sis	bc, 16377
+	call	__dsub
+BB1_7:
+	pop	iy
+	pop	iy
+	pop	iy
+BB1_8:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	private	__f64_xatan
+__f64_xatan:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	push	bc
+	push	de
+	push	hl
+	call	__dmul
+	ld	(ix - 3), hl
+	ld	(ix - 6), de
+	ld	(ix - 9), bc
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16432
+	push	iy
+	ld	iy, 2577673
+	push	iy
+	ld	iy, 4140746
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16496
+	push	iy
+	ld	iy, -3748154
+	push	iy
+	ld	iy, 2793206
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16530
+	push	iy
+	ld	iy, 269838
+	push	iy
+	ld	iy, 5540344
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16539
+	push	iy
+	ld	iy, -3039215
+	push	iy
+	ld	iy, 6963631
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16524
+	push	iy
+	ld	iy, 412076
+	push	iy
+	ld	iy, -4098315
+	push	iy
+	call	__dadd
+	ld	(ix - 12), hl
+	ld	(ix - 15), de
+	ld	(ix - 18), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 16461
+	push	hl
+	ld	hl, 8027650
+	push	hl
+	ld	hl, 7766214
+	push	hl
+	ld	hl, (ix - 3)
+	ld	de, (ix - 6)
+	ld	bc, (ix - 9)
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16512
+	push	iy
+	ld	iy, -4055172
+	push	iy
+	ld	iy, 7047733
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16538
+	push	iy
+	ld	iy, 729760
+	push	iy
+	ld	iy, 6179552
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16544
+	push	iy
+	ld	iy, 4107137
+	push	iy
+	ld	iy, -3850224
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 9)
+	push	iy
+	ld	iy, (ix - 6)
+	push	iy
+	ld	iy, (ix - 3)
+	push	iy
+	call	__dmul
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16524
+	push	iy
+	ld	iy, 412076
+	push	iy
+	ld	iy, -4098315
+	push	iy
+	call	__dadd
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 12)
+	ld	de, (ix - 15)
+	ld	bc, (ix - 18)
+	call	__ddiv
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix + 12)
+	push	iy
+	ld	iy, (ix + 9)
+	push	iy
+	ld	iy, (ix + 6)
+	push	iy
+	call	__dmul
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	_fabsl
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__dcmp
+	extern	__dmul
+	extern	_copysignl
+	extern	__dsub
+	extern	__frameset0
+	extern	__ddiv
+	extern	__dadd

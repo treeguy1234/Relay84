@@ -1,0 +1,111 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_sinpif
+_sinpif:
+	call	__frameset0
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	push	de
+	push	hl
+	call	_reduce_f32
+	pop	bc
+	pop	bc
+	ld	(ix + 6), hl
+	ld	(ix + 9), e
+	pop	ix
+	jp	_sinf
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	private	_reduce_f32
+_reduce_f32:
+	call	__frameset0
+	ld	bc, (ix + 6)
+	or	a, a
+	sbc	hl, hl
+	ld	e, 63
+	ld	a, (ix + 9)
+	call	__fmul
+	ld	l, a
+	push	hl
+	push	bc
+	call	_truncf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ld	e, -64
+	call	__fmul
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	call	__fadd
+	ld	hl, 4788187
+	ld	e, 64
+	call	__fmul
+	push	bc
+	pop	hl
+	ld	e, a
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_cospif
+_cospif:
+	call	__frameset0
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	push	de
+	push	hl
+	call	_reduce_f32
+	pop	bc
+	pop	bc
+	ld	(ix + 6), hl
+	ld	(ix + 9), e
+	pop	ix
+	jp	_cosf
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_tanpif
+_tanpif:
+	call	__frameset0
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	push	de
+	push	hl
+	call	_reduce_f32
+	pop	bc
+	pop	bc
+	ld	(ix + 6), hl
+	ld	(ix + 9), e
+	pop	ix
+	jp	_tanf
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_sinpi
+	label	_sinpi at _sinpif
+
+	section	.text,"ax",@progbits
+	public	_cospi
+	label	_cospi at _cospif
+
+	section	.text,"ax",@progbits
+	public	_tanpi
+	label	_tanpi at _tanpif
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__Unwind_SjLj_Register
+	extern	_tanf
+	extern	__Unwind_SjLj_Unregister
+	extern	__fadd
+	extern	_sinf
+	extern	_cosf
+	extern	__frameset0
+	extern	_truncf
+	extern	__fmul

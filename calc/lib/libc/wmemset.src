@@ -1,0 +1,37 @@
+	assume	adl=1
+
+	section	.text
+
+	public	_wmemset
+
+; wchar_t *wmemset(wchar_t *dst, wchar_t ch, size_t count)
+_wmemset:
+	ld	iy, -1
+	add	iy, sp
+	ld	bc, (iy + 10)	; BC = count
+	sbc	hl, hl
+	add	hl, bc		; HL = count - 1
+	ex	de, hl		; DE = count - 1
+	ld	hl, (iy + 4)	; HL = dst
+	ret	nc		; count == 0
+	add	hl, bc		; HL = dst + count
+	add	hl, de		; HL = dst + 2 * count - 1
+	ex	de, hl		; DE = dst + 2 * count - 1
+	lea	hl, iy + 8	; HL = &upper_byte
+	ldd
+	; HL = &lower_byte
+	; DE = dst + 2 * count - 2
+	ld	a, (hl)
+	ld	(de), a
+	push	de
+	pop	hl
+	ret	po		; count == 1
+	inc	hl		; HL = dst + 2 * count - 1
+	dec	de		; DE = dst + 2 * count - 3
+	; use lddr twice
+	push	bc
+	lddr
+	pop	bc
+	lddr
+	dec	hl
+	ret

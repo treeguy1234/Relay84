@@ -1,0 +1,19 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__iszerof
+
+; bool _iszerof(float)
+__iszerof:
+	xor	a, a
+	pop	bc, hl
+	adc	hl, hl
+	ex	(sp), hl
+	push	hl, bc
+	ret	nz	; non-zero mantissa
+	ld	a, l
+	adc	a, a
+	sub a, 1
+	sbc	a, a
+	ret

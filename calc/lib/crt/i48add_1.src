@@ -1,0 +1,22 @@
+; Performs 48-bit increment
+;
+; Returns:
+; ude:uhl = ude:uhl + 1
+
+	assume	adl=1
+
+	section	.text
+
+	public	__i48add_1
+__i48add_1:
+; CC: 8 bytes
+; HL != -1: 7F + 3R + 2
+; HL == -1: 9F + 3R + 2
+	inc	hl
+	add	hl, de
+	or	a, a
+	sbc	hl, de
+	ret	nz
+	; carry
+	inc	de
+	ret

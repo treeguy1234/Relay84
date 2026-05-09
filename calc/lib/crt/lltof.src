@@ -1,0 +1,15 @@
+	assume	adl=1
+
+	section	.text
+	public	__lltof
+__lltof:
+	push	af, iy, bc, de, hl
+	call	__lltof_c
+	pop	af
+	ld	a, e
+	pop	de
+	ld	e, a
+	pop	bc, iy, af
+	ret
+
+	extern	__lltof_c

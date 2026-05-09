@@ -1,0 +1,22 @@
+	assume	adl=1
+
+	section	.text
+	
+	public	__iszerol
+
+; bool iszerol(long double)
+__iszerol:
+	pop	bc, hl, de
+	xor	a, a
+	adc	hl, de
+	pop	de
+	push	bc, bc, bc, bc
+	; return if mantissa is non-zero
+	ret	nz	; mant_nonzero
+	ret	c	; mant_carry
+	ld	a, d
+	rla	; clear the signbit
+	or	a, e
+	sub	a, 1
+	sbc	a, a
+	ret

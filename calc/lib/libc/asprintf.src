@@ -1,0 +1,28 @@
+	assume	adl=1
+
+	section	.text
+
+	public	_asprintf
+	public	_vasprintf
+
+if HAS_PRINTF
+
+_asprintf := __asprintf_c
+_vasprintf := __vasprintf_c
+
+	extern	__asprintf_c
+	extern	__vasprintf_c
+
+else
+
+if defined __TICE__
+
+_asprintf := _boot_asprintf
+_vasprintf := _boot_vasprintf
+
+	extern	_boot_asprintf
+	extern	_boot_vasprintf
+
+end if
+
+end if

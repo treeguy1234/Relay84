@@ -1,0 +1,218 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_frexpl
+_frexpl:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	push	bc
+	push	de
+	push	hl
+	call	_fabsl
+	push	hl
+	pop	iy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 48
+	push	hl
+	lea	hl, iy
+	ld	(ix - 3), de
+	ld	(ix - 6), bc
+	call	__llshru
+	push	hl
+	pop	de
+	pop	hl
+	ld	c, 4
+	push	de
+	pop	hl
+	call	__ishru
+	ld	(ix - 12), hl
+	push	de
+	pop	hl
+	ld	bc, 16
+	or	a, a
+	sbc	hl, bc
+	jp	nc, BB0_3
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__llcmpzero
+	jr	nz, BB0_6
+	or	a, a
+	sbc	hl, hl
+	lea	de, iy
+	ld	iy, (ix + 15)
+	ld	(iy), hl
+	push	de
+	pop	iy
+	jr	BB0_5
+BB0_3:
+	ld	(ix - 9), iy
+	ld	bc, 2047
+	ld	iy, (ix - 12)
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	jp	nz, BB0_7
+	ld	hl, 8388607
+	ld	iy, (ix + 15)
+	ld	(iy), hl
+	ld	iy, (ix - 9)
+BB0_5:
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	jp	BB0_9
+BB0_6:
+	ld	(ix - 9), iy
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__llctlz
+	ld	iy, 0
+	lea	de, iy
+	ld	e, a
+	ld	(ix - 12), de
+	ld	hl, -1010
+	or	a, a
+	sbc	hl, de
+	ld	iy, (ix + 15)
+	ld	(iy), hl
+	ld	de, -11
+	ld	hl, (ix - 12)
+	add	hl, de
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	call	__llshl
+	push	hl
+	pop	iy
+	ld	(ix - 3), de
+	ld	(ix - 6), bc
+	pop	hl
+	ld	hl, 48
+	push	hl
+	lea	hl, iy
+	call	__llshru
+	pop	de
+	ld.sis	bc, 16368
+	call	__sxor
+	ld	de, 0
+	ld	e, l
+	ld	d, h
+	ld	hl, 48
+	push	hl
+	ex	de, hl
+	ld	de, 0
+	ld.sis	bc, 0
+	call	__llshl
+	ld	(ix - 9), hl
+	ld	(ix - 12), de
+	ld	(ix - 15), bc
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	dec	hl
+	push	hl
+	push	hl
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__lland
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 12)
+	ld	bc, (ix - 15)
+	jp	BB0_8
+BB0_7:
+	ld	bc, -1022
+	add	iy, bc
+	ld	hl, (ix + 15)
+	ld	(hl), iy
+	ld	l, e
+	ld	h, d
+	ld.sis	bc, 15
+	call	__sand
+	ld	iy, 0
+	ex	de, hl
+	ld	iyl, e
+	ld	iyh, d
+	ex	de, hl
+	ld.sis	de, 16352
+	add.sis	iy, de
+	ld	de, 0
+	ld.sis	bc, 0
+	ld	hl, 48
+	push	hl
+	lea	hl, iy
+	call	__llshl
+	ld	(ix - 12), hl
+	ld	(ix - 15), de
+	ld	(ix - 18), bc
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	dec	hl
+	push	hl
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__lland
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 12)
+	ld	de, (ix - 15)
+	ld	bc, (ix - 18)
+BB0_8:
+	call	__lladd
+	push	hl
+	pop	iy
+	pop	hl
+	pop	hl
+	pop	hl
+BB0_9:
+	ld	hl, (ix + 12)
+	push	hl
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	push	bc
+	push	de
+	push	iy
+	call	_copysignl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	_fabsl
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__llshru
+	extern	__lladd
+	extern	__lland
+	extern	_copysignl
+	extern	__llshl
+	extern	__llctlz
+	extern	__llcmpzero
+	extern	__sand
+	extern	__ishru
+	extern	__sxor

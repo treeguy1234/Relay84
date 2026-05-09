@@ -1,0 +1,100 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_softfloat_addM
+_softfloat_addM:
+	ld	hl, -20
+	call	__frameset
+	ld	iy, (ix + 9)
+	ld	hl, (ix + 12)
+	ld	(ix - 3), hl
+	ld	hl, (ix + 15)
+	ld	(ix - 6), hl
+	xor	a, a
+	ld	bc, 0
+	push	bc
+	pop	de
+	ld	e, (ix + 6)
+	dec	de
+	ld	(ix - 9), de
+BB0_1:
+	ld	hl, (iy)
+	ld	(ix - 19), iy
+	ld	e, (iy + 3)
+	ld	(ix - 16), e
+	ld	iy, (ix - 3)
+	ld	de, (iy)
+	ld	(ix - 15), de
+	ld	d, (ix - 16)
+	ld	e, (iy + 3)
+	ld	iyl, e
+	ld	(ix - 20), a
+	ld	c, a
+	xor	a, a
+	ld	(ix - 12), hl
+	ld	e, d
+	call	__ladd
+	ld	bc, (ix - 15)
+	ld	a, iyl
+	call	__ladd
+	push	hl
+	pop	bc
+	ld	iy, (ix - 6)
+	ld	(iy), bc
+	ld	(iy + 3), e
+	ld	hl, (ix - 9)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB0_7
+	push	bc
+	pop	iy
+	push	bc
+	pop	hl
+	ld	bc, (ix - 12)
+	ld	a, d
+	call	__lcmpu
+	ld	a, 1
+	jr	z, BB0_4
+	ld	a, 0
+BB0_4:
+	lea	hl, iy
+	ld	bc, (ix - 12)
+	ld	iyl, a
+	ld	a, d
+	call	__lcmpu
+	ccf
+	sbc	a, a
+	ld	l, a
+	inc	l
+	ld	a, iyl
+	bit	0, a
+	ld	a, (ix - 20)
+	jr	nz, BB0_6
+	ld	a, l
+BB0_6:
+	ld	de, (ix - 9)
+	dec	de
+	ld	(ix - 9), de
+	ld	iy, (ix - 6)
+	lea	iy, iy + 4
+	ld	(ix - 6), iy
+	ld	iy, (ix - 3)
+	lea	iy, iy + 4
+	ld	(ix - 3), iy
+	ld	iy, (ix - 19)
+	lea	iy, iy + 4
+	ld	bc, 0
+	jp	BB0_1
+BB0_7:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__lcmpu
+	extern	__ladd

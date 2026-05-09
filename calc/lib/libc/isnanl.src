@@ -1,0 +1,29 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__isnanl
+
+; bool _isnanl(long double)
+__isnanl:
+	pop	bc, hl, de
+	or	a, a
+	adc	hl, de
+	pop	de
+	push	bc, bc, bc, bc
+	ld	a, e
+	jr	nz, .mant_nonzero	; normal, subnormal, or NaN
+	jr	c, .mant_nonzero	; normal, subnormal, or NaN
+	; common NaN, inf, normal, or subnormal
+	or	a, a
+	ret	z
+	dec	a
+.mant_nonzero:
+	add	a, 16	; overflows 0xF0
+	sbc	a, a
+	ret	z
+	ld	a, d
+	add	a, a
+	add	a, 2
+	sbc	a, a
+	ret

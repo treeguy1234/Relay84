@@ -1,0 +1,352 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_ldexpl
+_ldexpl:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, (ix + 12)
+	push	bc
+	push	de
+	push	hl
+	call	_fabsl
+	ld	(ix - 9), hl
+	ld	(ix - 6), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, 4095
+	ld	iy, (ix + 15)
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB0_2
+	ld	iy, 4095
+BB0_2:
+	lea	hl, iy
+	ld	bc, -4095
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	p, BB0_4
+	ld	iy, -4096
+BB0_4:
+	ld	(ix - 12), iy
+	lea	hl, iy
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	(ix - 3), de
+	jr	nz, BB0_7
+BB0_5:
+	ld	de, (ix - 9)
+	ld	hl, (ix - 6)
+BB0_6:
+	ld	c, l
+	ld	b, h
+	jp	BB0_26
+BB0_7:
+	ld	hl, (ix - 9)
+	ld	bc, (ix - 6)
+	call	__llcmpzero
+	jp	nz, BB0_9
+	ex	de, hl
+	jp	BB0_26
+BB0_9:
+	ld	iy, 48
+	push	iy
+	call	__llshru
+	push	hl
+	pop	de
+	pop	hl
+	ld	c, 4
+	push	de
+	pop	hl
+	call	__ishru
+	ld	(ix - 15), hl
+	ld	bc, 16
+	ld	(ix - 18), de
+	ex	de, hl
+	or	a, a
+	sbc	hl, bc
+	jr	nc, BB0_12
+	ld	de, -52
+	ld	hl, (ix - 12)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB0_16
+BB0_11:
+	ld	hl, 5
+	ld	(_errno), hl
+	ld	de, 0
+	ld	(ix - 3), de
+	ld.sis	hl, 0
+	jp	BB0_6
+BB0_12:
+	ld	de, 2047
+	ld	hl, (ix - 15)
+	or	a, a
+	sbc	hl, de
+	jp	z, BB0_5
+	ld	bc, (ix - 12)
+	ld	iy, (ix - 15)
+	add	iy, bc
+	lea	hl, iy
+	ld	bc, -1023
+	add	hl, bc
+	ld	(ix - 12), hl
+	push	de
+	pop	bc
+	lea	de, iy
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	p, BB0_19
+	ld	bc, 1
+	push	de
+	pop	iy
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB0_20
+	ld	de, 15
+	ld	c, 4
+	lea	hl, iy
+	call	__ishl
+	push	hl
+	pop	iy
+	ld	hl, (ix - 18)
+	push	de
+	pop	bc
+	call	__iand
+	push	hl
+	pop	de
+	add	iy, de
+	ld	de, 0
+	ld.sis	bc, 0
+	ld	hl, 48
+	push	hl
+	lea	hl, iy
+	call	__llshl
+	ld	(ix - 12), hl
+	ld	(ix - 15), de
+	ld	(ix - 18), bc
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	dec	hl
+	push	hl
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	jp	BB0_24
+BB0_16:
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__llctlz
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	de, -11
+	add	hl, de
+	ex	de, hl
+	ld	hl, (ix - 12)
+	or	a, a
+	sbc	hl, de
+	ld	bc, 0
+	ld	(ix - 15), hl
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	p, BB0_18
+	ld	de, 1023
+	ld	iy, (ix - 12)
+	add	iy, de
+	ld	de, 0
+	ld.sis	bc, 0
+	ld	hl, 52
+	push	hl
+	lea	hl, iy
+	call	__llshl
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	jp	BB0_22
+BB0_18:
+	ld	bc, 2046
+	ld	hl, (ix - 15)
+	or	a, a
+	sbc	hl, bc
+	jp	c, BB0_23
+BB0_19:
+	ld	hl, 5
+	ld	(_errno), hl
+	ld	de, 0
+	ld	(ix - 3), de
+	ld.sis	bc, 32752
+	jp	BB0_26
+BB0_20:
+	ld	de, -1075
+	ld	hl, (ix - 12)
+	or	a, a
+	sbc	hl, de
+	jp	c, BB0_11
+	ld	hl, -32753
+	push	hl
+	scf
+	sbc	hl, hl
+	push	hl
+	push	hl
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__lland
+	ld	(ix - 15), iy
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 16
+	push	iy
+	ld	iy, 0
+	push	iy
+	push	iy
+	call	__lladd
+	ld	(ix - 3), hl
+	ld	(ix - 6), de
+	ld	(ix - 9), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	de, 1022
+	ld	iy, (ix - 15)
+	add	iy, de
+	ld	de, 0
+	ld.sis	bc, 0
+	ld	hl, 52
+	push	hl
+	lea	hl, iy
+	call	__llshl
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 3)
+	ld	de, (ix - 6)
+	ld	bc, (ix - 9)
+BB0_22:
+	call	__dmul
+	jp	BB0_25
+BB0_23:
+	push	de
+	ld	hl, (ix - 9)
+	ld	de, (ix - 3)
+	ld	bc, (ix - 6)
+	call	__llshl
+	ld	(ix - 3), hl
+	ld	(ix - 6), de
+	ld	(ix - 9), bc
+	pop	hl
+	ld	c, 4
+	ld	hl, (ix - 15)
+	call	__ishl
+	push	hl
+	pop	iy
+	ld	hl, 48
+	push	hl
+	ld	hl, (ix - 3)
+	ld	de, (ix - 6)
+	ld	bc, (ix - 9)
+	call	__llshru
+	push	hl
+	pop	de
+	pop	hl
+	add	iy, de
+	ld	hl, 48
+	push	hl
+	lea	hl, iy
+	ld	de, 0
+	ld.sis	bc, 0
+	call	__llshl
+	ld	(ix - 12), hl
+	ld	(ix - 15), de
+	ld	(ix - 18), bc
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	dec	hl
+	push	hl
+	push	hl
+	ld	hl, (ix - 3)
+	ld	de, (ix - 6)
+	ld	bc, (ix - 9)
+BB0_24:
+	call	__lland
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 12)
+	ld	de, (ix - 15)
+	ld	bc, (ix - 18)
+	call	__lladd
+BB0_25:
+	ld	(ix - 3), de
+	ex	de, hl
+	pop	hl
+	pop	hl
+	pop	hl
+BB0_26:
+	ld	hl, (ix + 12)
+	push	hl
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	push	bc
+	ld	hl, (ix - 3)
+	push	hl
+	push	de
+	call	_copysignl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_scalbnl
+	label	_scalbnl at _ldexpl
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__setflag
+	extern	__ishru
+	extern	_fabsl
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__llshru
+	extern	__iand
+	extern	__lladd
+	extern	__dmul
+	extern	__llshl
+	extern	__lland
+	extern	_copysignl
+	extern	__llctlz
+	extern	__llcmpzero
+	extern	__ishl
+	extern	_errno

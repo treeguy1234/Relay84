@@ -1,0 +1,28 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_llrintf
+_llrintf:
+	call	__frameset0
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	push	de
+	push	hl
+	call	_rintf
+	pop	bc
+	pop	bc
+	call	__ftoll
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_llrint
+	label	_llrint at _llrintf
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	_rintf
+	extern	__ftoll
+	extern	__frameset0

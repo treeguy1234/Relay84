@@ -1,0 +1,847 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	___f64_rem
+___f64_rem:
+	ld	hl, -49
+	call	__frameset
+	ld	hl, (ix + 9)
+	ld	de, (ix + 12)
+	ld	bc, (ix + 15)
+	ld	iy, 52
+	xor	a, a
+	push	iy
+	push	bc
+	pop	iy
+	call	__llshru
+	pop	de
+	ld.sis	bc, 2047
+	call	__sand
+	ld	(ix - 25), hl
+	ld	hl, 15
+	push	hl
+	scf
+	sbc	hl, hl
+	push	hl
+	push	hl
+	ld	hl, (ix + 9)
+	ld	de, (ix + 12)
+	ld	c, iyl
+	ld	b, iyh
+	call	__lland
+	ld	(ix - 28), hl
+	ld	(ix - 31), de
+	ld	(ix - 34), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 18)
+	ld	de, (hl)
+	ld	(ix - 13), de
+	push	hl
+	pop	iy
+	ld	de, (iy + 3)
+	ld	(ix - 16), de
+	ld	bc, (iy + 6)
+	ld	(ix - 19), bc
+	ld	hl, 52
+	push	hl
+	ld	iy, (ix - 13)
+	lea	hl, iy
+	call	__llshru
+	pop	de
+	ld.sis	bc, 2047
+	call	__sand
+	ld	(ix - 22), hl
+	ld	hl, 15
+	push	hl
+	scf
+	sbc	hl, hl
+	push	hl
+	push	hl
+	lea	hl, iy
+	ld	de, (ix - 16)
+	ld	bc, (ix - 19)
+	call	__lland
+	ld	(ix - 37), hl
+	ld	(ix - 40), de
+	ld	de, (ix - 25)
+	ld	(ix - 43), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld.sis	bc, 2047
+	ld	l, e
+	ld	h, d
+	or	a, a
+	sbc.sis	hl, bc
+	jp	nz, BB0_4
+	ld	iy, (ix - 22)
+	ld	hl, (ix - 28)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 34)
+	call	__llcmpzero
+	jp	nz, BB0_6
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	ld.sis	de, 2047
+	or	a, a
+	sbc.sis	hl, de
+	jp	nz, BB0_12
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 43)
+	call	__llcmpzero
+	jp	nz, BB0_6
+	jp	BB0_12
+BB0_4:
+	ld	iy, (ix - 22)
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	or	a, a
+	sbc.sis	hl, bc
+	jp	nz, BB0_8
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 43)
+	call	__llcmpzero
+	jp	z, BB0_9
+BB0_6:
+	ld	hl, (ix - 19)
+	push	hl
+	ld	hl, (ix - 16)
+	push	hl
+	ld	hl, (ix - 13)
+	push	hl
+	ld	hl, (ix + 15)
+	push	hl
+	ld	hl, (ix + 12)
+	push	hl
+	ld	hl, (ix + 9)
+	push	hl
+	call	_softfloat_propagateNaNF64UI
+	ld	iy, 18
+BB0_7:
+	add	iy, sp
+	ld	sp, iy
+	jp	BB0_13
+BB0_8:
+	ld	bc, 0
+	push	bc
+	pop	hl
+	ld	l, e
+	ld	h, d
+	push	bc
+	pop	de
+	ld	e, iyl
+	ld	d, iyh
+	dec	de
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB0_10
+BB0_9:
+	ld	hl, (ix + 9)
+	ld	bc, (ix + 15)
+	ld	de, (ix + 12)
+	jp	BB0_13
+BB0_10:
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	add.sis	hl, bc
+	or	a, a
+	sbc.sis	hl, bc
+	ld	(ix - 19), bc
+	jp	nz, BB0_15
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 43)
+	call	__llcmpzero
+	jp	nz, BB0_14
+BB0_12:
+	ld	hl, ___fe_cur_env
+	ld.sis	bc, -8
+	set	4, (hl)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pop	de
+BB0_13:
+	ld	sp, ix
+	pop	ix
+	ret
+BB0_14:
+	ld	hl, (ix - 43)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	ld	hl, (ix - 37)
+	push	hl
+	pea	ix - 10
+	call	_softfloat_normSubnormalF64Sig
+	xor	a, a
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix - 10)
+	ld	hl, (ix - 8)
+	ld	(ix - 37), hl
+	ld	hl, (ix - 5)
+	ld	(ix - 40), hl
+	ld	hl, (ix - 2)
+	ld	(ix - 43), hl
+BB0_15:
+	ld	hl, (ix - 25)
+	ld	(ix - 22), iy
+	add.sis	hl, bc
+	or	a, a
+	sbc.sis	hl, bc
+	jr	nz, BB0_18
+	ld	hl, (ix - 28)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 34)
+	call	__llcmpzero
+	jp	z, BB0_9
+	push	bc
+	push	de
+	push	hl
+	pea	ix - 10
+	call	_softfloat_normSubnormalF64Sig
+	xor	a, a
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 10)
+	ld	(ix - 25), hl
+	ld	hl, (ix - 8)
+	ld	(ix - 28), hl
+	ld	hl, (ix - 5)
+	ld	(ix - 31), hl
+	ld	hl, (ix - 2)
+	ld	(ix - 34), hl
+BB0_18:
+	ld	hl, 16
+	push	hl
+	ld	iy, 0
+	push	iy
+	push	iy
+	ld	hl, (ix - 28)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 34)
+	call	__llor
+	ld	(ix - 46), hl
+	ld	(ix - 28), de
+	ld	(ix - 16), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 16
+	push	hl
+	push	iy
+	push	iy
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 43)
+	call	__llor
+	ld	(ix - 34), hl
+	ld	(ix - 31), de
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 25)
+	ld	de, (ix - 22)
+	or	a, a
+	sbc.sis	hl, de
+	ex	de, hl
+	ld	iyl, e
+	ld	iyh, d
+	ex	de, hl
+	ld.sis	de, 1
+	or	a, a
+	sbc.sis	hl, de
+	call	pe, __setflag
+	ld	(ix - 37), bc
+	jp	p, BB0_28
+	ld.sis	de, -1
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	or	a, a
+	sbc.sis	hl, de
+	call	pe, __setflag
+	ld	hl, (ix + 9)
+	ld	bc, (ix + 15)
+	ld	de, (ix + 12)
+	jp	m, BB0_13
+	ld	hl, 9
+	push	hl
+	ld	hl, (ix - 34)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 37)
+	call	__llshl
+	ld	(ix - 37), hl
+	push	de
+	pop	iy
+	pop	hl
+	ld	hl, (ix - 25)
+	ld	de, (ix - 22)
+	or	a, a
+	sbc.sis	hl, de
+	ld	(ix - 40), iy
+	ld	(ix - 34), bc
+	jp	nz, BB0_42
+	ld	hl, 9
+	push	hl
+	ld	hl, (ix - 46)
+	ld	de, (ix - 28)
+	ld	bc, (ix - 16)
+	call	__llshl
+	ld	(ix - 13), hl
+	pop	hl
+	ld	hl, (ix - 34)
+	push	hl
+	push	iy
+	ld	iy, (ix - 37)
+	push	iy
+	ld	hl, (ix - 13)
+	ld	(ix - 16), de
+	ld	(ix - 25), bc
+	call	__llcmpu
+	pop	hl
+	pop	hl
+	pop	hl
+	sbc	a, a
+	ld	l, a
+	inc	l
+	ld	a, l
+	and	a, 1
+	bit	0, l
+	lea	bc, iy
+	jr	nz, BB0_23
+	ld	bc, 0
+BB0_23:
+	bit	0, l
+	ld	iy, (ix - 40)
+	jr	nz, BB0_25
+	ld	iy, 0
+BB0_25:
+	bit	0, l
+	ld	hl, (ix - 34)
+	jp	nz, BB0_27
+	ld.sis	hl, 0
+BB0_27:
+	ld	de, (ix - 19)
+	ld	e, a
+	ld	(ix - 19), de
+	push	hl
+	push	iy
+	push	bc
+	ld	hl, (ix - 13)
+	ld	de, (ix - 16)
+	ld	bc, (ix - 25)
+	call	__llsub
+	ld	(ix - 25), hl
+	pop	hl
+	pop	hl
+	pop	hl
+	xor	a, a
+	jp	BB0_43
+BB0_28:
+	ld	hl, 21
+	push	hl
+	ld	hl, (ix - 34)
+	ld	de, (ix - 31)
+	call	__llshru
+	pop	bc
+	push	de
+	push	hl
+	ld	(ix - 13), iy
+	call	_softfloat_approxRecip32_1
+	ld	(ix - 49), hl
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	hl, 9
+	push	hl
+	ld	hl, (ix - 46)
+	ld	de, (ix - 28)
+	ld	bc, (ix - 16)
+	call	__llshl
+	ld	(ix - 16), hl
+	ld	(ix - 25), de
+	ld	(ix - 28), bc
+	pop	hl
+	ld.sis	de, -30
+	ld	iy, (ix - 13)
+	add.sis	iy, de
+	ld	hl, 9
+	push	hl
+	ld	hl, (ix - 34)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 37)
+	call	__llshl
+	ld	(ix - 37), hl
+	ld	(ix - 40), de
+	ld	(ix - 34), bc
+	pop	hl
+	ld	e, iyh
+	ld	l, e
+	rlc	l
+	sbc	hl, hl
+	ld	h, e
+	ld	de, 32
+	ld	(ix - 13), iy
+	ex	de, hl
+	ld	e, iyl
+	ex	de, hl
+	ld	iy, (ix - 16)
+	ld	(ix - 43), hl
+	or	a, a
+	sbc	hl, hl
+BB0_29:
+	ld	l, a
+	ld	(ix - 31), hl
+	push	de
+	ld	(ix - 16), iy
+	lea	hl, iy
+	ld	de, (ix - 25)
+	ld	bc, (ix - 28)
+	call	__llshru
+	pop	iy
+	ld	iy, 0
+	push	iy
+	ld	iy, (ix - 31)
+	push	iy
+	ld	iy, (ix - 49)
+	push	iy
+	call	__llmulu
+	push	hl
+	pop	iy
+	ld	(ix - 31), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 13)
+	ld.sis	bc, 0
+	or	a, a
+	sbc.sis	hl, bc
+	call	pe, __setflag
+	jp	m, BB0_39
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, 128
+	push	hl
+	sbc	hl, hl
+	push	hl
+	lea	hl, iy
+	ld	bc, (ix - 31)
+	call	__lladd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, 32
+	push	iy
+	call	__llshru
+	push	hl
+	pop	iy
+	ld	(ix - 31), de
+	ld	(ix - 46), bc
+	pop	hl
+	ld	hl, 29
+	push	hl
+	ld	hl, (ix - 16)
+	ld	de, (ix - 25)
+	ld	bc, (ix - 28)
+	call	__llshl
+	ld	(ix - 16), hl
+	ld	(ix - 25), de
+	ld	(ix - 28), bc
+	pop	hl
+	ld	hl, (ix - 34)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	ld	hl, (ix - 37)
+	push	hl
+	lea	hl, iy
+	ld	de, (ix - 31)
+	ld	bc, (ix - 46)
+	call	__llmulu
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 16)
+	ld	de, (ix - 25)
+	ld	bc, (ix - 28)
+	call	__llsub
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	(ix - 16), hl
+	ld	(ix - 25), bc
+	call	__llcmpzero
+	ld	c, 1
+	jp	m, BB0_32
+	ld	c, 0
+BB0_32:
+	bit	0, c
+	ld	hl, (ix - 37)
+	jr	nz, BB0_34
+	or	a, a
+	sbc	hl, hl
+BB0_34:
+	bit	0, c
+	ld	iy, (ix - 40)
+	jr	nz, BB0_36
+	ld	iy, 0
+BB0_36:
+	ld	(ix - 28), iy
+	bit	0, c
+	ld	bc, (ix - 34)
+	jr	nz, BB0_38
+	ld.sis	bc, 0
+BB0_38:
+	ld	iy, (ix - 25)
+	push	iy
+	push	de
+	ld	de, (ix - 16)
+	push	de
+	ld	de, (ix - 28)
+	call	__lladd
+	push	hl
+	pop	iy
+	ld	(ix - 25), de
+	ld	(ix - 28), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld.sis	de, -29
+	ld	hl, (ix - 13)
+	add.sis	hl, de
+	ld	(ix - 13), hl
+	ld	de, -29
+	ld	hl, (ix - 43)
+	add	hl, de
+	ld	(ix - 43), hl
+	or	a, a
+	sbc	hl, hl
+	ld	de, 32
+	jp	BB0_29
+BB0_39:
+	ld	hl, 32
+	push	hl
+	lea	hl, iy
+	ld	bc, (ix - 31)
+	call	__llshru
+	ld	(ix - 13), hl
+	pop	hl
+	ld	a, e
+	ld	iy, (ix - 43)
+	lea	hl, iy
+	call	__inot
+	ld	bc, 31
+	call	__iand
+	ld	bc, (ix - 13)
+	call	__lshru
+	ld	(ix - 19), bc
+	ld	de, 30
+	add	iy, de
+	push	iy
+	ld	hl, (ix - 16)
+	ld	de, (ix - 25)
+	ld	bc, (ix - 28)
+	call	__llshl
+	ld	(ix - 13), hl
+	ld	(ix - 16), de
+	ld	(ix - 25), bc
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	de, 0
+	push	de
+	push	hl
+	ld	hl, (ix - 19)
+	push	hl
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 34)
+	call	__llmulu
+	pop	iy
+	pop	iy
+	pop	iy
+	push	bc
+	push	de
+	push	hl
+	ld	hl, (ix - 13)
+	ld	de, (ix - 16)
+	ld	bc, (ix - 25)
+	call	__llsub
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	(ix - 16), bc
+	push	bc
+	ld	(ix - 13), de
+	push	de
+	ld	(ix - 25), hl
+	push	hl
+	ld	iy, -1
+	lea	de, iy
+	push	de
+	pop	hl
+	ld.sis	bc, -1
+	call	__llcmps
+	pop	hl
+	pop	hl
+	pop	hl
+	call	pe, __setflag
+	jp	p, BB0_41
+	ld	bc, (ix - 16)
+	ld	de, (ix - 13)
+	jp	BB0_43
+BB0_41:
+	ld	hl, (ix - 34)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	ld	hl, (ix - 37)
+	push	hl
+	ld	iy, (ix - 25)
+	lea	hl, iy
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	call	__lladd
+	ld	(ix - 43), hl
+	ld	(ix - 31), de
+	ld	(ix - 28), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	jp	BB0_45
+BB0_42:
+	ld	hl, 8
+	push	hl
+	ld	hl, (ix - 46)
+	ld	de, (ix - 28)
+	ld	bc, (ix - 16)
+	call	__llshl
+	ld	(ix - 25), hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 19), hl
+BB0_43:
+	ld	iy, (ix - 25)
+BB0_44:
+	ld	(ix - 28), bc
+	ld	(ix - 31), de
+	ld	hl, (ix - 19)
+	ld	e, a
+	ld	bc, 1
+	xor	a, a
+	call	__ladd
+	ld	(ix - 19), hl
+	ld	a, e
+	ld	hl, (ix - 34)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	ld	hl, (ix - 37)
+	push	hl
+	ld	(ix - 43), iy
+	lea	hl, iy
+	ld	de, (ix - 31)
+	ld	bc, (ix - 28)
+	call	__llsub
+	push	hl
+	pop	iy
+	ld	(ix - 13), de
+	ld	(ix - 16), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	push	bc
+	push	de
+	push	iy
+	ld	de, -1
+	push	de
+	pop	hl
+	ld.sis	bc, -1
+	call	__llcmps
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, (ix - 16)
+	ld	de, (ix - 13)
+	call	pe, __setflag
+	jp	m, BB0_44
+BB0_45:
+	ld	(ix - 25), iy
+	ld	(ix - 16), bc
+	ld	(ix - 13), de
+	push	bc
+	push	de
+	push	iy
+	ld	hl, (ix - 43)
+	ld	de, (ix - 31)
+	ld	bc, (ix - 28)
+	call	__lladd
+	push	hl
+	pop	iy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	(ix - 34), bc
+	push	bc
+	ld	(ix - 40), de
+	push	de
+	ld	(ix - 37), iy
+	push	iy
+	ld	de, -1
+	push	de
+	pop	hl
+	ld.sis	bc, -1
+	call	__llcmps
+	pop	hl
+	pop	hl
+	pop	hl
+	call	pe, __setflag
+	jp	p, BB0_49
+	ld	hl, (ix - 43)
+	ld	hl, (ix - 31)
+	ld	hl, (ix - 28)
+	ld	iy, (ix - 25)
+	ld	hl, (ix - 19)
+	ld	e, a
+	ld	bc, 1
+	xor	a, a
+	call	__land
+	ld	(ix - 19), hl
+	ld	hl, (ix - 37)
+	ld	de, (ix - 40)
+	ld	bc, (ix - 34)
+	call	__llcmpzero
+	jr	z, BB0_48
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	jr	BB0_50
+BB0_48:
+	ld	hl, (ix - 19)
+	bit	0, l
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	jr	z, BB0_50
+BB0_49:
+	ld	iy, (ix - 43)
+	ld	de, (ix - 31)
+	ld	hl, (ix - 28)
+	ld	c, l
+	ld	b, h
+BB0_50:
+	ld	a, (ix + 6)
+	ld	hl, 63
+	push	hl
+	ld	(ix - 25), iy
+	lea	hl, iy
+	ld	(ix - 13), de
+	ld	(ix - 16), bc
+	call	__llshrs
+	ld	(ix - 19), hl
+	ld	(ix - 28), de
+	ld	(ix - 31), bc
+	pop	hl
+	push	bc
+	push	de
+	ld	hl, (ix - 19)
+	push	hl
+	lea	hl, iy
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	call	__lladd
+	pop	iy
+	pop	iy
+	pop	iy
+	ld	iy, (ix - 31)
+	push	iy
+	ld	iy, (ix - 28)
+	push	iy
+	ld	iy, (ix - 19)
+	push	iy
+	call	__llxor
+	ld	(ix - 28), hl
+	push	de
+	pop	iy
+	ld	(ix - 19), bc
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 25)
+	ld	de, (ix - 13)
+	ld	bc, (ix - 16)
+	call	__llcmpzero
+	ld	l, a
+	jp	m, BB0_52
+	ld	a, 0
+	jr	BB0_53
+BB0_52:
+	ld	a, -1
+BB0_53:
+	ld	bc, (ix - 28)
+	xor	a, l
+	ld	l, a
+	ld	de, (ix - 19)
+	push	de
+	push	iy
+	push	bc
+	ld	de, (ix - 22)
+	push	de
+	push	hl
+	call	_softfloat_normRoundPackToF64
+	ld	iy, 15
+	jp	BB0_7
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__Unwind_SjLj_Register
+	extern	__frameset
+	extern	__inot
+	extern	__llcmpzero
+	extern	__llsub
+	extern	__sand
+	extern	__ladd
+	extern	__setflag
+	extern	_softfloat_normRoundPackToF64
+	extern	__llcmps
+	extern	__llcmpu
+	extern	__Unwind_SjLj_Unregister
+	extern	_softfloat_approxRecip32_1
+	extern	__llshru
+	extern	__iand
+	extern	_softfloat_propagateNaNF64UI
+	extern	__lladd
+	extern	__llshrs
+	extern	_softfloat_normSubnormalF64Sig
+	extern	__llor
+	extern	__llshl
+	extern	__land
+	extern	__llmulu
+	extern	__lland
+	extern	__llxor
+	extern	__lshru
+	extern	___fe_cur_env

@@ -1,0 +1,91 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_softfloat_shortShiftLeftM
+_softfloat_shortShiftLeftM:
+	ld	hl, -17
+	call	__frameset
+	ld	iy, (ix + 9)
+	ld	a, (ix + 12)
+	neg
+	ld	de, 0
+	ld	e, (ix + 6)
+	push	de
+	pop	hl
+	dec	hl
+	ld	c, 2
+	ld	(ix - 3), hl
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (iy)
+	ld	(ix - 6), hl
+	ld	l, (iy + 3)
+	ld	(ix - 7), l
+	and	a, 31
+	ld	(ix - 11), a
+	ex	de, hl
+	ld	c, 2
+	call	__ishl
+	push	hl
+	pop	iy
+BB0_1:
+	ld	bc, (ix - 6)
+	ld	a, (ix - 7)
+	ld	l, (ix + 12)
+	call	__lshl
+	ld	hl, (ix - 3)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jr	z, BB0_3
+	dec	hl
+	ld	(ix - 3), hl
+	ld	(ix - 10), iy
+	ld	(ix - 14), iy
+	ld	iy, (ix + 9)
+	ld	de, (ix - 10)
+	add	iy, de
+	ld	(ix - 17), bc
+	ld	bc, (iy - 8)
+	ld	d, a
+	ld	a, (iy - 5)
+	ld	(ix - 6), bc
+	ld	(ix - 7), a
+	ld	l, (ix - 11)
+	call	__lshru
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 17)
+	ld	a, d
+	call	__lor
+	ld	iy, (ix + 15)
+	ld	bc, (ix - 10)
+	add	iy, bc
+	ld	(iy - 4), hl
+	ld	(iy - 1), e
+	ld	iy, (ix - 14)
+	ld	de, -4
+	add	iy, de
+	jr	BB0_1
+BB0_3:
+	ld	hl, (ix + 15)
+	push	hl
+	pop	iy
+	ld	(iy), bc
+	ld	(iy + 3), a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 15.0.7 (https://github.com/CE-Programming/llvm-project 31b787336940cbc96d054033c3d843f344507042)"
+	extern	__Unwind_SjLj_Register
+	extern	__lor
+	extern	__Unwind_SjLj_Unregister
+	extern	__lshl
+	extern	__frameset
+	extern	__lshru
+	extern	__ishl

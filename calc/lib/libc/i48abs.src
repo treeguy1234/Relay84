@@ -1,0 +1,24 @@
+	assume	adl=1
+
+	section	.text
+
+	public	_i48abs
+
+; int48_t i48abs(int48_t)
+_i48abs:
+	pop	bc
+	pop	de
+	ex	(sp), hl
+
+	; read the signbit
+	push	hl
+	add	hl, hl
+	ex	(sp), hl
+
+	push	bc
+	ex	de, hl
+	jp	c, __i48neg	; negative
+	; positive
+	ret
+
+	extern	__i48neg

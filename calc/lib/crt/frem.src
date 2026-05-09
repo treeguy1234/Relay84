@@ -1,0 +1,23 @@
+	assume	adl=1
+
+	section	.text
+
+	public	__frem
+
+; wraps _fmodf
+__frem:
+	push	iy, de, hl
+
+	push	de, hl	; y
+	ld	e, a	
+	push	de	; x_hi8
+	push	bc	; x_lo24
+	call	_fmodf
+	pop	bc, bc, bc, bc
+
+	ld	a, e
+	ex	(sp), hl
+	pop	bc, de, iy
+	ret
+
+	extern	_fmodf

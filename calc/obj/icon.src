@@ -1,0 +1,27 @@
+	section .icon
+
+	jp	___prgm_init
+	db	$01
+	public ___icon
+___icon:
+	db	$10, $10
+	db	$FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+	db	$FF, $FF, $FF, $FF, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $FF, $FF, $FF, $FF
+	db	$FF, $FF, $FF, $FF, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $FF, $FF, $FF, $FF
+	db	$6B, $6B, $6B, $6B, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $6B, $6B, $6B, $6B
+	db	$6B, $00, $FF, $FF, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $FF, $FF, $00, $6B
+	db	$6B, $DE, $00, $FF, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $FF, $00, $DE, $6B
+	db	$6B, $DF, $DE, $00, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $00, $DE, $DF, $6B
+	db	$6B, $FF, $DF, $DE, $DE, $00, $FF, $00, $FF, $00, $FF, $DE, $DE, $DF, $FF, $6B
+	db	$6B, $FF, $FF, $DF, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $DF, $FF, $FF, $6B
+	db	$6B, $FF, $FF, $FF, $DE, $00, $FF, $00, $FF, $00, $FF, $DE, $FF, $FF, $FF, $6B
+	db	$6B, $FF, $FF, $FF, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $FF, $FF, $FF, $6B
+	db	$6B, $FF, $FF, $FF, $DE, $00, $FF, $00, $FF, $00, $FF, $DE, $FF, $FF, $FF, $6B
+	db	$6B, $6B, $6B, $6B, $DE, $FF, $FF, $FF, $FF, $FF, $FF, $DE, $6B, $6B, $6B, $6B
+	db	$FF, $FF, $FF, $FF, $DE, $00, $FF, $00, $FF, $00, $FF, $DE, $FF, $FF, $FF, $FF
+	db	$FF, $FF, $FF, $FF, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $DE, $FF, $FF, $FF, $FF
+	db	$FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+	public ___description
+___description:
+	db	"TI-84 Plus CE Messaging App", 0
+___prgm_init:

@@ -1,0 +1,26 @@
+	assume	adl=1
+
+	section	.text
+
+	public	_longjmp
+_longjmp    := 000098h
+	public	_memchr
+_memchr     := 00009Ch
+	public	_memcmp
+_memcmp     := 0000A0h
+	public	_setjmp
+_setjmp     := 0000B8h
+	public	_strcat
+_strcat     := 0000C0h
+	public	_strchr
+_strchr     := 0000C4h
+	public	_strcpy
+_strcpy     := 0000CCh
+	public	_strncat
+_strncat    := 0000D8h
+	public	_strncpy
+_strncpy    := 0000E0h
+	public	_strstr
+_strstr     := 0000F0h
+	public	_strtok
+_strtok     := 0000F4h
