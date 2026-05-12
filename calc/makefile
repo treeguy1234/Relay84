@@ -2,7 +2,7 @@
 # Makefile Options
 # ----------------------------
 
-NAME = ArdUSB
+NAME = TIChat
 ICON = icon.png
 DESCRIPTION = "TI-84 Plus CE Messaging App"
 COMPRESSED = YES
