@@ -1,0 +1,27 @@
+	section .icon
+
+	jp	___prgm_init
+	db	$01
+	public ___icon
+___icon:
+	db	$10, $10
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $00, $00, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $BA, $BA, $00, $00, $00, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $BA, $BA, $00, $00, $00, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $00, $BA, $BA, $BA, $00, $BA, $BA, $BA, $00, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $00, $00, $00, $BA, $BA, $00, $BA, $BA, $00, $00, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $00, $BA, $BA, $BA, $00, $BA, $00, $00, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $00, $00, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $00, $00, $BA, $00, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA
+	db	$BA, $BA, $BA, $BA, $BA, $BA, $BA, $00, $00, $00, $BA, $BA, $BA, $BA, $BA, $BA
+	public ___description
+___description:
+	db	"Arduino USB Test", 0
+___prgm_init:

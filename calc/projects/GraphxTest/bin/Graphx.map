@@ -1,0 +1,68 @@
+Section          Base   Top    High   Length
+---------------- ------ ------ ------ -------
+.icon            D1A882 D1A99A           118h
+.init.libs       D1A99A D1A9F2            58h
+.libs            D1A9F2 D1AA25            33h
+.init.clock      D1AA25 D1AA25             0h
+.init.reruncheck D1AA25 D1AA25             0h
+.init            D1AA25 D1AA45            20h
+.fini            D1AA45 D1AA79            34h
+.text            D1AA79 D1AC6E           1F5h
+.data            D1AC6E D1AC6E             0h
+.rodata          D1AC6E D1ACC2            54h
+.init_array      000000 000000             0h
+.ctors           000000 000000             0h
+.dtors           000000 000000             0h
+.fini_array      000000 000000             0h
+.bss             D052C6 D052C6 D13FD8      0h
+.header          D1A87F D1A882             3h
+
+Label                       Value
+-------------------------   ------
+___low_bss                = D052C6
+___len_bss                = 000000
+___heaptop                = D13FD8
+___heapbot                = D052C6
+___libs                   = D1A9F2
+___init_array_count       = 000000
+___ctors_count            = 000000
+___dtors_count            = 000000
+___fini_array_count       = 000000
+__stack                   = D1A87E
+__frameset                = D1AA79
+__idivs                   = D1AA87
+__idvrms                  = D1AA8E
+__idvrmu                  = D1AABC
+__ineg                    = D1AAD4
+__ishl                    = D1AADD
+_os_DisableHomeTextBuffer = D1AB03
+_os_EnableHomeTextBuffer  = D1AB15
+_os_GetCSC                = 021D3C
+.missingappvar            = D1AC6E
+.libloadname              = D1AC73
+.libloadnamelen           = 000007
+.webaddress               = D1AC7B
+__start                   = D1AA25
+___exithl                 = D1AA45
+skip._exit                = D1AA45
+skip.__Exit               = D1AA45
+skip._abort               = D1AA45
+_exit.sp                  = D1AA46
+_exit.flash_wait_states   = D1AA50
+_main                     = D1AB27
+_drawMenuOption           = D1ABEA
+_.str                     = D1AC90
+_.str.1                   = D1AC9F
+_.str.2                   = D1ACA8
+_.str.3                   = D1ACB0
+_.str.4                   = D1ACBA
+_.str.5                   = D1ACBF
+lib.LibLoad               = D1A9F2
+_#gfx_Begin               = D1AA05
+_#gfx_End                 = D1AA09
+_#gfx_SetColor            = D1AA0D
+_#gfx_PrintStringXY       = D1AA11
+_#gfx_SetTextFGColor      = D1AA15
+_#gfx_GetStringWidth      = D1AA19
+_#gfx_Rectangle           = D1AA1D
+_#gfx_FillRectangle       = D1AA21
