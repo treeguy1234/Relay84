@@ -15,7 +15,7 @@ static srl_device_t srl;
 static bool serial_connected = false;
 static uint8_t srl_buffer[256];
 static char lastText[256] = {0};
-static char name[128] = {"Nick"};
+static char name[128] = {""};
 static int currentScreen = 0;
 static bool hasDrawnMenus = false;
 static int messageLine = 0;
