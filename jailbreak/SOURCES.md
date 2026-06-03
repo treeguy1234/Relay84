@@ -1,4 +1,4 @@
-Jailbreak files have not been included due to licensing reasons. Here is a list of all of the jailbreak files you will need:
+Jailbreak files have not been included due to licensing reasons. Here is a list of all of the jailbreak files you might need:
 
  - [https://yvantt.github.io/arTIfiCE/](https://yvantt.github.io/arTIfiCE/)
  - [https://github.com/mateoconlechuga/cesium/releases](https://github.com/mateoconlechuga/cesium/releases)
