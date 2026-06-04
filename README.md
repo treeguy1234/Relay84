@@ -6,7 +6,7 @@ A peer-to-peer messaging system for TI-84 Plus CE calculators, built with the CE
 
 ## How It Works
 
-Each calculator connects via USB to an ESP32-S3. When a message is sent from the calculator, the ESP32-S3 broadcasts it over **ESP-NOW** — a lightweight Wi-Fi protocol by Espressif — to all other ESP32-S3 boards registered by MAC address. Those boards forward the message to their connected calculators over USB.
+Each calculator connects via USB to an ESP32-S3. When a message is sent from the calculator, the ESP32-S3 broadcasts it over **ESP-NOW**, a lightweight Wi-Fi protocol by Espressif, to all other ESP32-S3 boards registered by MAC address. Those boards forward the message to their connected calculators over USB.
 
 ```
 [TI-84 CE] <--USB--> [ESP32-S3] <--ESP-NOW--> [ESP32-S3] <--USB--> [TI-84 CE]
