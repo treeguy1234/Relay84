@@ -64,7 +64,7 @@ Follow the [CE C Toolchain setup guide](https://ce-programming.github.io/toolcha
 
 ### 3. Connect and Chat
 
-Plug each calculator into its paired ESP32-S3 via USB-C. Launch the messaging program on the calculator. Messages will be sent to all other calculators in the group in real time.
+Launch the messaging program on the calculator. **THEN** (the order is important) plug each calculator into its paired ESP32-S3 via USB-C.  Messages will be sent to all other calculators in the group in real time.
 
 ---
 
