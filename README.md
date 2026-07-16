@@ -34,7 +34,7 @@ Each calculator connects via USB to an ESP32-S3. When a message is sent from the
 
 ```
 Relay84/
-├── calc/        # CE C Toolchain source for the calculator client
+├── calc/        # CE C Toolchain project for the calculator client
 ├── esp32/       # PlatformIO source for the ESP32-S3 firmware
 ├── pictures/    # Picture references for how to set up. Primarily used as a picture hosting folder for the main .md files
 └── jailbreak/   # Includes SOURCES.md, a file that includes links to the files used to jailbreak the TI-84 Plus CE
