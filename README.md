@@ -77,6 +77,14 @@ Launch the messaging program on the calculator. **THEN** (the order is important
 
 ---
 
+## Work in Progress
+
+- [ ] Create a settings screen
+- [ ] Connect to WiFi for cloud communication
+- [ ] Simplify functions for use and possibly create a library to seamlessly send messages via USB
+
+---
+
 ## Contributing
 
 Contributions are welcome. Please open an issue before submitting a pull request.
